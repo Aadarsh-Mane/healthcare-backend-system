@@ -1241,7 +1241,7 @@ export const generateBillForDischargedPatient = async (req, res) => {
     bufferStream.push(null);
 
     // Folder ID in Google Drive
-    const folderId = "1NMX7WXVcSY354Eg8BtDXaPtn-attnl8f";
+    const folderId = "1MKYZ4fIUzERPyYzL_8I101agWemxVXts";
 
     // Upload PDF to Google Drive
     const driveFile = await drive.files.create({
@@ -1664,7 +1664,7 @@ export const getDoctorAdvice = async (req, res) => {
         bufferStream.push(null);
 
         // Folder ID in Google Drive
-        const folderId = "1NMX7WXVcSY354Eg8BtDXaPtn-attnl8f";
+        const folderId = "1MKYZ4fIUzERPyYzL_8I101agWemxVXts";
 
         // Upload PDF to Google Drive
         const driveFile = await drive.files.create({
@@ -1925,7 +1925,7 @@ export const generateFinalReceipt = async (req, res) => {
     bufferStream.push(null);
 
     // Folder ID in Google Drive
-    const folderId = "1NMX7WXVcSY354Eg8BtDXaPtn-attnl8f";
+    const folderId = "1MKYZ4fIUzERPyYzL_8I101agWemxVXts";
 
     // Upload PDF to Google Drive
     const driveFile = await drive.files.create({
@@ -2220,57 +2220,55 @@ export const getDoctorAdvic1 = async (req, res) => {
     bufferStream.push(null);
 
     // Folder ID in Google Drive
-    const folderId = "1NMX7WXVcSY354Eg8BtDXaPtn-attnl8f";
-    try {
-      const result = await new Promise((resolve, reject) => {
-        const uploadStream = cloudinary.v2.uploader.upload_stream(
-          { resource_type: "auto", folder: "doctor_advices" },
-          (error, result) => {
-            if (error) reject(error);
-            else resolve(result);
-          }
-        );
-        bufferStream.pipe(uploadStream);
-      });
-      console.log(result.secure_url);
-      return res.status(200).json({
-        message: "Doctor advice generated successfully.",
-        fileLink: result.secure_url,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        message: "Failed to upload PDF to Cloudinary",
-        error: error.message,
-      });
-    }
-    // Upload PDF to Google Drive
+    const folderId = "1MKYZ4fIUzERPyYzL_8I101agWemxVXts";
     // try {
-    // const driveFile = await drive.files.create({
-    //   resource: {
-    //     name: `DoctorAdvice_${patientId}.pdf`,
-    //     parents: [folderId],
-    //   },
-    //   media: {
-    //     mimeType: "application/pdf",
-    //     body: bufferStream,
-    //   },
-    //   fields: "id, webViewLink",
-    // });
-
-    // Extract file's public link
-    //   const fileLink = driveFile.data.webViewLink;
-
+    //   const result = await new Promise((resolve, reject) => {
+    //     const uploadStream = cloudinary.v2.uploader.upload_stream(
+    //       { resource_type: "auto", folder: "doctor_advices" },
+    //       (error, result) => {
+    //         if (error) reject(error);
+    //         else resolve(result);
+    //       }
+    //     );
+    //     bufferStream.pipe(uploadStream);
+    //   });
+    //   console.log(result.secure_url);
     //   return res.status(200).json({
     //     message: "Doctor advice generated successfully.",
-    //     fileLink: fileLink,
+    //     fileLink: result.secure_url,
     //   });
     // } catch (error) {
     //   return res.status(500).json({
-    //     message: "Failed to upload PDF to Google Drive",
+    //     message: "Failed to upload PDF to Cloudinary",
     //     error: error.message,
     //   });
     // }
-    // });
+    // Upload PDF to Google Drive
+    try {
+      const driveFile = await drive.files.create({
+        resource: {
+          name: `DoctorAdvice_${patientId}.pdf`,
+          parents: [folderId],
+        },
+        media: {
+          mimeType: "application/pdf",
+          body: bufferStream,
+        },
+        fields: "id, webViewLink",
+      });
+
+      const fileLink = driveFile.data.webViewLink;
+
+      return res.status(200).json({
+        message: "Doctor advice generated successfully.",
+        fileLink: fileLink,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: "Failed to upload PDF to Google Drive",
+        error: error.message,
+      });
+    }
   } catch (error) {
     console.error("Error generating doctor advice:", error);
     return res
@@ -2599,7 +2597,7 @@ export const getDoctorSheet = async (req, res) => {
     bufferStream.push(null);
 
     // Folder ID in Google Drive
-    const folderId = "1NMX7WXVcSY354Eg8BtDXaPtn-attnl8f";
+    const folderId = "1MKYZ4fIUzERPyYzL_8I101agWemxVXts";
 
     // Upload PDF to Google Drive
     const driveFile = await drive.files.create({
@@ -3010,7 +3008,7 @@ export const generateOpdBill = async (req, res) => {
     bufferStream.push(null);
 
     // Folder ID in Google Drive
-    const folderId = "1NMX7WXVcSY354Eg8BtDXaPtn-attnl8f";
+    const folderId = "1MKYZ4fIUzERPyYzL_8I101agWemxVXts";
 
     // Upload PDF to Google Drive
     const driveFile = await drive.files.create({
@@ -3260,7 +3258,7 @@ export const generateOpdReceipt = async (req, res) => {
     bufferStream.push(null);
 
     // Folder ID in Google Drive
-    const folderId = "1NMX7WXVcSY354Eg8BtDXaPtn-attnl8f";
+    const folderId = "1MKYZ4fIUzERPyYzL_8I101agWemxVXts";
 
     // Upload PDF to Google Drive
     const driveFile = await drive.files.create({
@@ -3516,7 +3514,7 @@ export const generateaIpddReceipt = async (req, res) => {
     bufferStream.push(null);
 
     // Folder ID in Google Drive
-    const folderId = "1NMX7WXVcSY354Eg8BtDXaPtn-attnl8f";
+    const folderId = "1MKYZ4fIUzERPyYzL_8I101agWemxVXts";
 
     // Upload PDF to Google Drive
     const driveFile = await drive.files.create({
