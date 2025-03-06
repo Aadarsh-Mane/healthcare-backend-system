@@ -15,7 +15,7 @@ import { Server } from "socket.io";
 import http from "http";
 import { socketHandler } from "./socketHandler.js";
 import fs from "fs";
-const port = 8000;
+const port = 3003;
 
 const app = express();
 const server = http.createServer(app);
@@ -32,7 +32,7 @@ app.use("/labs", labRouter);
 app.get("/patientHistory/:patientId", getPatientHistory);
 
 app.get("/", (req, res) => {
-  return res.status(200).json("Welcome to Ai in HealthCare");
+  return res.status(200).json("Welcome to spandan in HealthCare");
 });
 app.post("/generateDischargeSummary", async (req, res) => {
   const patientData = req.body; // Patient details sent from Flutter
